@@ -1,1 +1,1 @@
-Another file by developer2
+Another file by developer1 and this is text file
