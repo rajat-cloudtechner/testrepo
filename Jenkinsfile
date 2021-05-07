@@ -1,15 +1,15 @@
 pipeline {
     agent any
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
-                echo "Hello World!"
+                sh "mvn clean install"
             }
         }
 
-        stage('list files') {
+        stage('Unit test') {
             steps {
-                sh "ls -ltrh"
+                sh "mvn test"
             }
         }
 
