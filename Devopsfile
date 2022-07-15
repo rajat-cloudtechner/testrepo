@@ -6,9 +6,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'main',
-		credentialsId: '927a0ea4-bde7-4a1e-a590-f0b87f0d7c40',
-		url: 'https://github.com/cloudtechner/testrepo.git'
+                git branch: 'rajat', credentialsId: '5517caf3-af87-4046-b3db-d366119c612d', url: 'https://github.com/cloudtechner/testrepo.git'
             }
         }    
         stage('Compile') {
@@ -26,10 +24,19 @@ pipeline {
                 sh 'mvn test'
             }
         }
-	stage('Deploy To Environment') {
+        stage("Sonarcloud analysis") {
             steps {
-                sh 'echo Deployment Done'
-            }
+                sh 'mvn clean verify sonar:sonar -Dsonar.login=e3d809329eca25ae656a4b54a6615e4978cc29ad -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=maven-prod -Dsonar.projectKey=maven-testt'
+              }
+            
         }
+        stage("Quality Gate") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }
+
     }
 }
