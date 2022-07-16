@@ -27,25 +27,4 @@ pipeline {
         stage("Sonarcloud analysis") {
             steps {
                 withSonarQubeEnv('sonarcloud') {
-                    sh 'mvn clean verify sonar:sonar -Dsonar.login=939ad17754fdeb3939539d78fce285b85c4787c5 -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=ct-maven -Dsonar.projectKey=javaa'
-                    sh 'sleep 60'
-                }
-                
-            }
-        }
-        stage("Quality Gate") {
-            steps {
-              timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
-              }
-            }
-          }
-          stage('Build Number') {
-              steps {
-                  sh 'mv /var/lib/jenkins/workspace/test/target/my-app-1.0-SNAPSHOT.jar /var/lib/jenkins/workspace/test/target/1.0.$BUILD_NUMBER.jar'
-                  sh 'sudo cp -rvf /var/lib/jenkins/workspace/test/target/1.0.$BUILD_NUMBER.jar /var/lib/jenkins/artifact/1.0.$BUILD_NUMBER.jar'
-              }
-          }
-         
-    }
-}
+                    sh 'mvn clean verify sonar:sonar -Dsonar.login=939ad17754fdeb3939539d78fce285b85c4787c5 -Dsonar.host.url=https://sonarclou
