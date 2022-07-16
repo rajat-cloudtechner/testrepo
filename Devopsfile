@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'rajat', credentialsId: '5517caf3-af87-4046-b3db-d366119c612d', url: 'https://github.com/cloudtechner/testrepo.git'
+                git branch: 'main', credentialsId: '156d977a-31a6-4d87-a37f-f5b6401ef92b', url: 'https://github.com/rajat-cloudtechner/testrepo.git'
             }
         }    
         stage('Compile') {
@@ -26,9 +26,12 @@ pipeline {
         }
         stage("Sonarcloud analysis") {
             steps {
-                sh 'mvn clean verify sonar:sonar -Dsonar.login=e3d809329eca25ae656a4b54a6615e4978cc29ad -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=maven-prod -Dsonar.projectKey=maven-testt'
-              }
-            
+                withSonarQubeEnv('sonarcloud') {
+                    sh 'mvn clean verify sonar:sonar -Dsonar.login=939ad17754fdeb3939539d78fce285b85c4787c5 -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=ct-maven -Dsonar.projectKey=javaa'
+                    sh 'sleep 60'
+                }
+                
+            }
         }
         stage("Quality Gate") {
             steps {
@@ -37,6 +40,12 @@ pipeline {
               }
             }
           }
-
+          stage('Build Number') {
+              steps {
+                  sh 'mv /var/lib/jenkins/workspace/maven-1/target/my-app-1.0-SNAPSHOT.jar /var/lib/jenkins/workspace/maven-1/target/1.0.$BUILD_NUMBER.jar'
+                  sh 'sudo cp -rvf /var/lib/jenkins/workspace/maven-1/target/1.0.$BUILD_NUMBER.jar /var/lib/jenkins/artifact/1.0.$BUILD_NUMBER.jar'
+              }
+          }
+         
     }
 }
