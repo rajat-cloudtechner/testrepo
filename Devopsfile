@@ -42,8 +42,8 @@ pipeline {
           }
           stage('Build Number') {
               steps {
-                  sh 'mv /var/lib/jenkins/workspace/maven-1/target/my-app-1.0-SNAPSHOT.jar /var/lib/jenkins/workspace/maven-1/target/1.0.$BUILD_NUMBER.jar'
-                  sh 'sudo cp -rvf /var/lib/jenkins/workspace/maven-1/target/1.0.$BUILD_NUMBER.jar /var/lib/jenkins/artifact/1.0.$BUILD_NUMBER.jar'
+                  sh 'mv /var/lib/jenkins/workspace/test/target/my-app-1.0-SNAPSHOT.jar /var/lib/jenkins/workspace/test/target/1.0.$BUILD_NUMBER.jar'
+                  sh 'sudo cp -rvf /var/lib/jenkins/workspace/test/target/1.0.$BUILD_NUMBER.jar /var/lib/jenkins/artifact/1.0.$BUILD_NUMBER.jar'
               }
           }
          
