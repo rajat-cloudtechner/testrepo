@@ -19,17 +19,24 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+    
     - name: compile
       run: mvn clean install
+    
     - name: package
       run: mvn package
+    
     - name: unit test
       run: mvn test
+    
     - name: list the current directory
       run: ls -a
+    
     - name: what is in target folder
       run: |
         cd target
         ls -a
+    - name: analize with sonarcloud
+      run: mvn verify sonar:sonar -Dsonar.projectKey=mvn- -Dsonar.organization=gh -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=de0f9420847bbbdd9dbd49b1b13e278300abb33e
 
       
