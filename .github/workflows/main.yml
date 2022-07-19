@@ -25,3 +25,5 @@ jobs:
       run: mvn package
     - name: unit test
       run: mvn test
+      run: ls -ltrh
+      
