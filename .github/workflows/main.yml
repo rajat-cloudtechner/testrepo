@@ -26,7 +26,3 @@ jobs:
     - name: unit test
       run: mvn test
     - run: mkdir artifact && cp target/*.jar artifact
-    - uses: actions/upload-artifact@v2
-      with:
-       name: Package
-       path: artifact 
