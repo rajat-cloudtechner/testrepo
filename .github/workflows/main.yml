@@ -25,5 +25,11 @@ jobs:
       run: mvn package
     - name: unit test
       run: mvn test
-      run: ls -ltrh
+    - name: list the current directory
+      run: ls -a
+    - name: what is in target folder
+      run: |
+        cd target
+        ls -a
+
       
