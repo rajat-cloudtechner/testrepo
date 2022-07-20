@@ -45,7 +45,7 @@ jobs:
     - name: deploy
       uses: horochx/deploy-via-scp@1.1.0
       with:
-        local: /target/my-app-1.0-SNAPSHOT.jar
+        local: /home/runner/work/testrepo/testrepo/target/my-app-1.0-SNAPSHOT.jar
         remote: /home/ubuntu
         host: 52.202.54.83
         port: 22
