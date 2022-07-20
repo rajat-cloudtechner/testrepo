@@ -59,4 +59,4 @@ jobs:
         port: 22
         user: ubuntu
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        last_ssh: ls -a    
+        last_ssh: nohup java -jar my-app-SNAPSHOT.jar &
