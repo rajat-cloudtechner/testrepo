@@ -38,13 +38,4 @@ jobs:
         ls -a
     - name: analize with sonarcloud
       run: mvn verify sonar:sonar -Dsonar.projectKey=mvn- -Dsonar.organization=gh -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=de0f9420847bbbdd9dbd49b1b13e278300abb33e
-    
-    - name: ssh deploy
-      uses: easingthemes/ssh-deploy@v2.2.11
-      with:
-       key: ${{ secrets.SSH_PRIVATE_KEY }}
-       host: 44.202.16.248
-       user: ubuntu
-       port: 22    
-       Target: /home/ubuntu    
-      
+  
