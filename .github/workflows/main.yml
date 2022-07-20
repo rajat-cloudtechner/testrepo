@@ -39,3 +39,11 @@ jobs:
     - name: analize with sonarcloud
       run: mvn verify sonar:sonar -Dsonar.projectKey=mvn- -Dsonar.organization=gh -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=de0f9420847bbbdd9dbd49b1b13e278300abb33e
   
+    - name: deploying to ec2
+    - uses: actions/checkout@v2
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        host: 44.202.16.248
+        user: ubuntu
+        port: 2
+        Target: /home/ubuntu
