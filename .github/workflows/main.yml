@@ -51,4 +51,12 @@ jobs:
         port: 22
         user: ubuntu
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        last_ssh: ifconfig
+        
+    - name: scp to remote
+      uses: cross-the-world/ssh-scp-ssh-pipelines@v1.1.4
+      with:
+        host: 52.202.54.83
+        port: 22
+        user: ubuntu
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        last_ssh: ls -a    
