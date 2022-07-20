@@ -42,10 +42,9 @@ jobs:
     - name: ssh deploy
       uses: easingthemes/ssh-deploy@v2.2.11
       with:
-       host: 44.202.16.248
-       port: 22    
-       user: ubuntu
        key: ${{ secrets.SSH_PRIVATE_KEY }}
-       connect_timeout: 30s
+       host: 44.202.16.248
+       user: ubuntu
+       port: 22    
        Target: /home/ubuntu    
       
