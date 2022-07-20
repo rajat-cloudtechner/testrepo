@@ -29,6 +29,9 @@ jobs:
     - name: unit test
       run: mvn test
     
+    - name: working directory
+      run: pwd
+      
     - name: list the current directory
       run: ls -a
     
