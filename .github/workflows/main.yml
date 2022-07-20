@@ -39,5 +39,15 @@ jobs:
     - name: analize with sonarcloud
       run: mvn verify sonar:sonar -Dsonar.projectKey=mvn- -Dsonar.organization=gh -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=de0f9420847bbbdd9dbd49b1b13e278300abb33e
     
-      
+    - name: ssh-scp-ssh-pipelines
+      uses: cross-the-world/ssh-scp-ssh-pipelines@v1.1.4
+      with:
+       host: 44.202.16.248
+       port: 22    
+       user: ubuntu
+       key: ${{ secrets.SSH_PRIVATE_KEY }}
+       connect_timeout: 30s
+       local_path: ./*
+       remote_path: /home/ubuntu
+     
       
