@@ -53,7 +53,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         
     - name: deployment
-      uses: appleboy/ssh-action@main
+      uses: appleboy/ssh-action@master
       with:
         host: 52.202.54.83
         username: ubuntu
