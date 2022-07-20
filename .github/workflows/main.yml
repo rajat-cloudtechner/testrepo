@@ -42,7 +42,7 @@ jobs:
     - name: analize with sonarcloud
       run: mvn verify sonar:sonar -Dsonar.projectKey=mvn- -Dsonar.organization=gh -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=de0f9420847bbbdd9dbd49b1b13e278300abb33e
       
-    - name: deploy
+    - name: scp to remote
       uses: horochx/deploy-via-scp@1.1.0
       with:
         local: /home/runner/work/testrepo/testrepo/target/my-app-1.0-SNAPSHOT.jar
@@ -52,11 +52,13 @@ jobs:
         user: ubuntu
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         
-    - uses: appleboy/ssh-action@master
+    - name: deployment
+      uses: appleboy/ssh-action@v2
       with:
         host: 52.202.54.83
         username: ubuntu
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
-        script: nohup java -jar /root/my-app-1.0-SNAPSHOT.jar &
-    
+        script: |
+         cd /home/ubuntu
+         nohup java -jar my-app-SNAPSHOT.jar &      
