@@ -1,0 +1,26 @@
+name: deploying over EC2
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+   
+  jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: deployment
+      uses: appleboy/ssh-action@master
+      with:
+        host: 52.202.54.83
+        username: ubuntu
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+         cd /home/ubuntu
+         nohup java -jar my-app-SNAPSHOT.jar &    
