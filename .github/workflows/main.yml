@@ -39,10 +39,12 @@ jobs:
     - name: analize with sonarcloud
       run: mvn verify sonar:sonar -Dsonar.projectKey=mvn- -Dsonar.organization=gh -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=de0f9420847bbbdd9dbd49b1b13e278300abb33e
       
-    - uses: actions/checkout@v2
-    - name: Run a multi-line script
-        run:|
-          eval $(ssh-agent -s)
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" |  ssh-add -
-          scp -o StrictHostKeyChecking=no /target/my-app-1.0-SNAPSHOT.jar ubuntu@52.202.54.83:/home/ubuntu
-          ssh -o StrictHostKeyChecking=no ubuntu@$52.202.54.83 "nohup java -jar /home/ubuntu/my-app-1.0-SNAPSHOT.jar &;"
+    - name: deploy
+      uses: horochx/deploy-via-scp@1.1.0
+      with:
+        local: /target/my-app-1.0-SNAPSHOT.jar
+        remote: /home/ubuntu
+        host: 52.202.54.83
+        port: 22
+        user: ubuntu
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
