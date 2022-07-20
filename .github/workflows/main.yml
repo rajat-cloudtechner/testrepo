@@ -42,8 +42,8 @@ jobs:
     - name: deploying to ec2
     - uses: actions/checkout@v2
       with:
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        host: 44.202.16.248
-        user: ubuntu
-        port: 2
-        Target: /home/ubuntu
+       key: ${{ secrets.SSH_PRIVATE_KEY }}
+       host: 44.202.16.248
+       user: ubuntu
+       port: 22
+       Target: /home/ubuntu
