@@ -51,3 +51,12 @@ jobs:
         port: 22
         user: ubuntu
         key: ${{ secrets.SSH_PRIVATE_KEY }}
+        
+    - uses: appleboy/ssh-action@master
+      with:
+        host: 52.202.54.83
+        username: ubuntu
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: nohup java -jar /root/my-app-1.0-SNAPSHOT.jar &
+    
